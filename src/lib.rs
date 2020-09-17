@@ -1,17 +1,28 @@
 #![no_std]
 
-use log::{
-    Metadata,
-    Record
-};
+use log::{Metadata, Record, LevelFilter};
 
 use rtt_target::*;
 
-pub struct RTTLogger;
+/// An RTT-based logger implementation.
+pub struct RTTLogger {
+    level_filter: LevelFilter,
+}
+
+impl RTTLogger {
+    /// Static-friendly const initializer.
+    ///
+    /// * `level_filter`: The default level to enable.
+    pub const fn new(level_filter: LevelFilter) -> RTTLogger {
+        RTTLogger {
+            level_filter
+        }
+    }
+}
 
 impl log::Log for RTTLogger {
-    fn enabled(&self, _metadata: &Metadata) -> bool {
-        true
+    fn enabled(&self, metadata: &Metadata) -> bool {
+        self.level_filter.ge(&metadata.level())
     }
 
     fn log(&self, record: &Record) {
@@ -24,10 +35,3 @@ impl log::Log for RTTLogger {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
