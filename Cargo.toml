@@ -10,4 +10,4 @@ repository = "https://github.com/drogue-iot/rtt-logger"
 
 [dependencies]
 log = "0.4.11"
-rtt-target = {version = "0.3.1", features = ["cortex-m"] }
+rtt-target = { version = "0.4" }
