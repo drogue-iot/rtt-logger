@@ -1,6 +1,6 @@
 //! A logger implementation to use RTT with the Rust `log` crate.
 //!
-//! ```ignore
+//! ```
 //! use log::{info, LevelFilter};
 //! use rtt_logger::RTTLogger;
 //! use rtt_target::rtt_init_print;
